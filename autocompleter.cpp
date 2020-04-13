@@ -47,9 +47,15 @@ void autocompleter::Autocompleter::AddText(const std::string &text) {
       current_word.push_back(ToLower(c));
     }
     else {
-      word_storage_.AddWord(current_word);
-      current_word.clear();
+      if(!current_word.empty()) {
+        word_storage_.AddWord(current_word);
+        current_word.clear();
+      }
     }
+  }
+  if(!current_word.empty()) {
+    word_storage_.AddWord(current_word);
+    current_word.clear();
   }
 }
 

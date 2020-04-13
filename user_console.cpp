@@ -22,7 +22,7 @@ std::string& autocompleter::UserConsole::Request::GetString() {
 autocompleter::UserConsole::Request
 autocompleter::UserConsole::GetRequest() {
   std::cout << "write request(word - write word, "
-      << "text - write text, letters - add letters" << std::endl;
+      << "text - write text, letters - add letters)" << std::endl;
   autocompleter::UserConsole::Request::RequestType request_type;
 
   bool have_right_input = false;
@@ -44,9 +44,19 @@ autocompleter::UserConsole::GetRequest() {
       std::cout << "write text(only one line)" << std::endl;
       have_right_input = true;
     }
+    else {
+      std::cout << "please repeat" << std::endl;
+    }
   }
   std::string request_string;
-  std::cin >> request_string;
+  if (request_type != autocompleter::UserConsole::Request::RequestType::AddText) {
+    std::cin >> request_string;
+  }
+  else {
+    while (request_string.empty()) {
+      std::getline(std::cin, request_string);
+    }
+  }
   return std::move(Request(request_type, request_string));
 }
 

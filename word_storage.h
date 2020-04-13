@@ -52,13 +52,16 @@ class WordStorage {
     }
   };
   std::pair<Node*, size_t> GetHintNode(Node* node) {
+    if(node == nullptr) {
+      return {nullptr, 0};
+    }
     size_t income_count = node->number_of_income;
     Node* result_node = node;
     for(auto child : node->children) {
       auto result = GetHintNode(child.second);
       if (result.second > income_count) {
         income_count = result.second;
-        result_node = child.second;
+        result_node = result.first;
       }
     }
     return {result_node, income_count};
