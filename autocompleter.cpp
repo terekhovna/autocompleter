@@ -6,8 +6,7 @@
 #include "stdexcept"
 
 autocompleter::Autocompleter::Autocompleter()
-    : have_word_{ false },
-      current_record_{word_storage_.GetRecord("")} {
+    : have_word_{ false } {
 }
 
 void autocompleter::Autocompleter::Start() {
@@ -58,12 +57,12 @@ void autocompleter::Autocompleter::AddLetters(const std::string &letters) {
   if (!have_word_) {
     throw std::logic_error("you doesn't write word");
   }
-  current_record_.AddLetters(letters);
-  user_console_.WriteHint(current_record_.GetHint());
+  current_request_ += letters;
+  user_console_.WriteHint(word_storage_.GetHint(current_request_));
 }
 
 void autocompleter::Autocompleter::ProcessWord(const std::string &word) {
-  current_record_ = word_storage_.GetRecord(word);
+  current_request_ = word;
   have_word_ = true;
-  user_console_.WriteHint(current_record_.GetHint());
+  user_console_.WriteHint(word_storage_.GetHint(current_request_));
 }

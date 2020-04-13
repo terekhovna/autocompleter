@@ -17,7 +17,7 @@ class Autocompleter {
   void AddLetters(const std::string &letters);
   bool have_word_;
   WordStorage word_storage_;
-  WordStorage::Record current_record_;
+  std::string current_request_;
   UserConsole user_console_;
 };
 

@@ -22,7 +22,7 @@ std::string& autocompleter::UserConsole::Request::GetString() {
 autocompleter::UserConsole::Request
 autocompleter::UserConsole::GetRequest() {
   std::cout << "write request(word - write word, "
-      << "text- write text, letters - add letters" << std::endl;
+      << "text - write text, letters - add letters" << std::endl;
   autocompleter::UserConsole::Request::RequestType request_type;
 
   bool have_right_input = false;
